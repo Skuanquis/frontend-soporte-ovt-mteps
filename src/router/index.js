@@ -73,6 +73,12 @@ const routes = [
         name: 'ver-actividades',
         component: () => import('@/views/pages/VerActividades.vue'),
         meta: { requiresAuth: true, roles: ['operador', 'supervisor'] }
+      },
+      {
+        path: 'numeros',
+        name: 'numeros',
+        component: () => import('@/views/pages/NumerosOVT.vue'),
+        meta: { requiresAuth: true, roles: ['administrador'] }
       }
     ]
   }

@@ -111,3 +111,7 @@ export const updateRolesSupervisor = (idSupervisor, idUser) => {
   return api.put(`/update-roles/${idSupervisor}/${idUser}`);
 };
 
+export const getOperadoresSupervisores = () => {
+  return api.get('/operadores-supervisores');
+};
+

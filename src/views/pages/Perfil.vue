@@ -2,10 +2,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { getUserInfo, updateUserProfile, updateUserPassword, getOperadores, updateRolSupervisor, updateRolesSupervisor } from '@/services/userService';
+import { getUserInfo, updateUserProfile, updateUserPassword, getOperadores, updateRolesSupervisor } from '@/services/userService';
 import { useToast } from 'primevue/usetoast';
 import { jwtDecode } from "jwt-decode";
+import { useStore } from 'vuex';
 
+const store = useStore();
 const token = localStorage.getItem('token');
 const decoded = jwtDecode(token);
 const toast = useToast();
@@ -20,7 +22,7 @@ const userId = ref(null);
 const router = useRouter();
 const rol = decoded.role;
 const idUser = decoded.id;
-const value1 = ref('');
+//const value1 = ref('');
 const value2 = ref('');
 const operadores = ref([]);
 
@@ -28,7 +30,7 @@ const loadOperadores = async () => {
     try {
         const response = await getOperadores();
         operadores.value = response.data
-        console.log(operadores.value);
+        //console.log(operadores.value);
     } catch (error) {
         console.error('Error fetching operadores info:', error);
     }
@@ -51,7 +53,7 @@ const loadUserInfo = async () => {
     }
 };
 
-const asignarSupervision = async () =>{
+/*const asignarSupervision = async () =>{
     console.log(value1.value.nombre);
     console.log(value1.value.id_usuario);
     try {
@@ -60,15 +62,23 @@ const asignarSupervision = async () =>{
     } catch (error) {
         toast.add({ severity: 'error', summary: 'Error', detail: 'Error al actualizar la Error al designar supervisor', life: 3000 });
     }
-}
+}*/
+
+const cerrarSesion = () => {
+    localStorage.removeItem('token');
+    store.commit('clearUser');
+    router.push('/');
+};
+
 
 const delegarSupervision = async () =>{
-    console.log(value2.value.nombre);
-    console.log(value2.value.id_usuario);
-    console.log(idUser);
+    //console.log(value2.value.nombre);
+    //console.log(value2.value.id_usuario);
+    //console.log(idUser);
     try {
         await updateRolesSupervisor(value2.value.id_usuario, idUser);
         toast.add({ severity: 'success', summary: 'Éxito', detail: 'Supervisor asignado con exito', life: 3000 });
+        cerrarSesion()
     } catch (error) {
         toast.add({ severity: 'error', summary: 'Error', detail: 'Error al designar supervisor', life: 3000 });
     }
@@ -177,19 +187,7 @@ onMounted(() => {
         </div>
     </div>
     <div class="grid p-fluid" v-if="rol === 'supervisor'">
-        <div class="col-12 md:col-6">
-            <div class="card">
-                <h5>Asignar Supervisión</h5>  
-                <div class="p-fluid mt-3">
-                    <FloatLabel>
-                        <Dropdown id="operador" :options="operadores" v-model="value1" optionLabel="nombre"></Dropdown>
-                        <label for="operador">Elige un operador</label>
-                    </FloatLabel>
-                    <br>
-                    <Button label="Confirmar" class="mr-2 mb-2" @click="asignarSupervision"></Button>
-                </div>
-            </div>
-        </div>
+
         <div class="col-12 md:col-6">
             <div class="card">
                 <h5>Delegar Supervisión</h5>  

@@ -157,9 +157,9 @@ const generatePDF = () => {
     doc.text(`Problema: ${value4.value.name}`, 14, 62);
     doc.text(`Sumproblema: ${subProblema.value.name || ""}`, 14, 68);
     doc.text(`Estado: ${value3.value.name}`, 105, 50);
-    doc.text(`Fecha Inicio: ${value5.value instanceof Date ? value5.value.toISOString().split('T')[0] : null}`, 105, 56);
-    doc.text(`Fecha Fin: ${value6.value instanceof Date ? value6.value.toISOString().split('T')[0] : null}`, 105, 62);
-    doc.text(`Fecha del Reporte: ${fechaActualDoc}`, 105, 68);
+    doc.text(`Fecha Inicio: ${formatDate(value5.value)}`, 105, 56);
+    doc.text(`Fecha Fin: ${formatDate(value6.value)}`, 105, 62);
+    doc.text(`Fecha del Reporte: ${formatDate(fechaActual)}`, 105, 68);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);

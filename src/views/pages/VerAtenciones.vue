@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getUserAtenciones, updateAtencion } from '@/services/atencionService';
+import { getUserAtenciones, updateAtencion, getUserAtencionesByDate } from '@/services/atencionService';
 import { getUserInfo } from '@/services/userService';
 import { useToast } from 'primevue/usetoast';
 import { jsPDF } from 'jspdf';
@@ -23,6 +23,8 @@ const subProblema = ref(null);
 const atenciones = ref([]);
 const loading1 = ref(false);
 const nombre = ref('');
+const valueFechaIni = ref('');
+const valueFechaFin = ref('');
 
 const principal = ref([
     { name: 'Planillas', code: 'P' },
@@ -90,7 +92,37 @@ const loadUserInfo = async () => {
 const editarAtencion = ref(false);
 const selectedAtencion = ref(null);
 
+const obtenerAtencionesPorFecha = async () => {
+    if (!valueFechaIni.value || !valueFechaFin.value) {
+        toast.add({ severity: 'warn', summary: 'Campos requeridos', detail: 'Por favor, completa las fechas de inicio y fin.', life: 5000 });
+        return;
+    }
+
+    loading1.value = true;
+    try {
+        const fechaInicioFormatted = new Date(valueFechaIni.value).toISOString().slice(0, 10);
+        const fechaFinFormatted = new Date(valueFechaFin.value).toISOString().slice(0, 10);
+
+        const response = await getUserAtencionesByDate(fechaInicioFormatted, fechaFinFormatted);
+        if (response && response.data) {
+            atenciones.value = response.data.map(atencion => ({
+                ...atencion,
+                fecha: new Date(atencion.fecha)
+            }));
+        } else {
+            throw new Error('No data received');
+        }
+    } catch (error) {
+        console.error('Error fetching atenciones:', error);
+        toast.add({ severity: 'error', summary: 'Error', detail: 'Error al cargar las atenciones', life: 3000 });
+    } finally {
+        loading1.value = false;
+    }
+};
+
 const loadAtenciones = async () => {
+    valueFechaIni.value = '';
+    valueFechaFin.value = '';
     loading1.value = true;
     try {
         const response = await getUserAtenciones();
@@ -102,6 +134,7 @@ const loadAtenciones = async () => {
         } else {
             throw new Error('No data received');
         }
+
     } catch (error) {
         console.error('Error fetching atenciones:', error);
         toast.add({ severity: 'error', summary: 'Error', detail: 'Error al cargar las atenciones', life: 3000 });
@@ -215,9 +248,8 @@ onMounted(() => {
 
 
 const limpiarFiltros = () => iniciarFiltros();
-const generatePDF = () => {
+const generatePDF = ( fecha1, fecha2) => {
     const doc = new jsPDF();
-
     const logo1 = new Image();
     const logo2 = new Image();
     logo1.src = '/layout/images/bicentenario.png'
@@ -250,7 +282,10 @@ const generatePDF = () => {
     doc.setFontSize(12);
 
     doc.text(`Pasante: ${nombre.value}`, 14, 60);
-    doc.text(`Fecha del Reporte: ${fechaActualDoc}`, 14, 66);
+    doc.text(`Fecha del Reporte: ${formatDate(fechaActual)}`, 14, 66);
+
+    doc.text(`Fecha Inicio: ${fecha1 ? formatDate(fecha1) : "Todos los registros"}`, 105, 60);
+    doc.text(`Fecha Fin: ${fecha2 ? formatDate(fecha2) : "Todos los registros"}`, 105, 66);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
@@ -281,7 +316,7 @@ const generatePDF = () => {
         estado: aten.estado || 'N/D'
     }));
 
-
+    console.log(data);
     doc.autoTable({
         startY: 80,
         columns: headers,
@@ -304,12 +339,34 @@ onMounted(() => {
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <div class="grid">
-                    <div class="col-6">
+                <div class="grid p-fluid">
+                    <div class="col-2">
                         <h5>Mis Atenciones</h5>
                     </div>
-                    <div class="col-6 text-right"><Button label="Exportar a PDF" icon="pi pi-file-pdf"
-                            class="p-button-succes" @click="generatePDF" />
+                    <div class="col-2">
+                        <div class="p-fluid">
+                            <FloatLabel>
+                                <Calendar inputId="fecha-inicio" v-model="valueFechaIni" dateFormat="dd/mm/yy"></Calendar>
+                                <label for="fecha-inicio">Fecha Inicio</label>
+                            </FloatLabel>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="p-fluid">
+                            <FloatLabel>
+                                <Calendar inputId="fecha-fin" v-model="valueFechaFin" dateFormat="dd/mm/yy"></Calendar>
+                                <label for="fecha-fin">Fecha Fin</label>
+                            </FloatLabel>
+                        </div>
+                    </div>
+                    <div class="col-2 mt-1">
+                        <Button label="Por Fecha" @click="obtenerAtencionesPorFecha" class="p-button-info" />
+                    </div>
+                    <div class="col-2 mt-1">
+                        <Button label="Registro Completo" @click="loadAtenciones" class="p-button-success" />
+                    </div>
+                    <div class="col-2 text-right mt-1"><Button label="Exportar a PDF" icon="pi pi-file-pdf"
+                            class="p-button-succes" @click="generatePDF(valueFechaIni, valueFechaFin)" />
                     </div>
                 </div>
                 <DataTable :value="atenciones" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]" dataKey="id" :rowHover="true"

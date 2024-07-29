@@ -3,7 +3,7 @@
 import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { createActivity, getAllActivities } from '@/services/actividadesService';
-import { getOperadores } from '@/services/userService';
+import { getOperadoresSupervisores } from '@/services/userService';
 import { FilterMatchMode } from 'primevue/api';
 const dialogVisible = ref(false);
 const newActivity = ref({
@@ -19,7 +19,7 @@ const toast = useToast();
 
 const fetchOperadores = async () => {
   try {
-    const response = await getOperadores();
+    const response = await getOperadoresSupervisores();
     operadores.value = response.data;
   } catch (error) {
     toast.error('Error al cargar operadores');

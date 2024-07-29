@@ -50,6 +50,8 @@ const login = async () => {
         router.push('/dashboard');
     } catch (error) {
         alert(`Error: ${error.response.data.error}`);
+        username.value = '';
+        password.value = '';
     }
 };
 
