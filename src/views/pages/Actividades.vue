@@ -10,7 +10,7 @@ const newActivity = ref({
   titulo: '',
   descripcion: '',
   hora: '',
-  fecha: new Date(),
+  fecha: '',
   id_usuario: null
 });
 const actividades = ref([]);
@@ -40,11 +40,16 @@ const submitActivity = async () => {
     toast.add({ severity: 'warn', summary: 'Advertencia', detail: 'Por favor, completa todos los campos requeridos.', life: 3000 });
     return;
   }
-  const formattedHour = newActivity.value.hora.getHours() + ':' + newActivity.value.hora.getMinutes();
+  const hours = newActivity.value.hora.getHours().toString().padStart(2, '0');
+  const minutes = newActivity.value.hora.getMinutes().toString().padStart(2, '0');
+  const formattedHour = `${hours}:${minutes}`;//aqui
+
   const activityToSubmit = {
     ...newActivity.value,
-    hora: formattedHour
+    hora: formattedHour,
+    fecha: newActivity.value.fecha.toISOString().slice(0, 10)//aqui
   };
+
   try {
     await createActivity(activityToSubmit);
     toast.add({ severity: 'success', summary: 'Éxito', detail: 'Actividad creada con éxito', life: 3000 });
@@ -55,6 +60,7 @@ const submitActivity = async () => {
     toast.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la actividad', life: 3000 });
   }
 };
+
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);

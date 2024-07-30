@@ -27,4 +27,9 @@ export const getReporteAnioMes = (anio, mes) => {
 export const getUserAtencionesByDate = (fechaInicio, fechaFin) => {
   return api.get(`/atenciones/intervalo?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`);
 }
-  
+
+
+export const getReporteAnioMesUserId = (id) => {
+  return api.get(`/reporte-atenciones-usuario/${id}`);
+};
+;

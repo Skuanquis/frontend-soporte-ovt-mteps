@@ -37,8 +37,8 @@ const modelJefe = [
         label: 'Acciones',
         items: [
             { label: 'Reportes', icon: 'pi pi-fw pi-file', to: '/dashboard/reportes' },
-            { label: 'Ver Pasantes', icon: 'pi pi-fw pi-users', to: '/dashboard/ver-usuarios' },
-            { label: 'Registrar Pasante', icon: 'pi pi-fw pi-user-plus', to: '/dashboard/registrar-usuario' },
+            { label: 'Ver Usuarios', icon: 'pi pi-fw pi-users', to: '/dashboard/ver-usuarios' },
+            { label: 'Registrar Usuario', icon: 'pi pi-fw pi-user-plus', to: '/dashboard/registrar-usuario' },
             { label: 'Asignar Actividad', icon: 'pi pi-fw pi-plus', to: '/dashboard/actividades' },
             { label: 'OVT en Números', icon: 'pi pi-fw pi-database', to: '/dashboard/numeros' },
             { label: 'Cerrar Sesión', icon: 'pi pi-fw pi-sign-out', command: () => cerrarSesion() }

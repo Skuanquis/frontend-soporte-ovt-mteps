@@ -79,7 +79,7 @@ const isOutsideClicked = (event) => {
         <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
 
         </button>
-        <div class="layout-topbar-menu">
+        <div class="layout-topbar-menu mt-2">
             <h5>{{ nombre }}</h5>
         </div>
     </div>

@@ -55,6 +55,7 @@ onMounted(() => {
 
 <template>
     <div class="grid p-fluid">
+        <div class="col-12 md:col-1"></div>
         <div class="col-12 md:col-3">
             <div class="card">
                 <div class="field text-center"><h2>{{ nombreDelDia }}</h2></div>
@@ -66,7 +67,7 @@ onMounted(() => {
                 </ul>
             </div>
         </div>
-        <div class="col-12 md:col-6">
+        <div class="col-12 md:col-7">
             <div class="card">
                 <h5>Actividades Pendientes</h5>
                 <ul class="activity-list detailed">
@@ -79,12 +80,10 @@ onMounted(() => {
                 </ul>
             </div>
         </div>
-        <div class="col-12 md:col-3">
-            <div class="card">
-
-            </div>
+        <div class="col-12 md:col-1">
         </div>
-        <div class="col-12 md:col-9">
+        <div class="col-12 md:col-1"></div>
+        <div class="col-12 md:col-10">
             <div class="card">
                 <h5>Actividades Completadas</h5>
                 <DataTable :value="actividadesC" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">

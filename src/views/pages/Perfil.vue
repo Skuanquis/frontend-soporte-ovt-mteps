@@ -170,14 +170,14 @@ onMounted(() => {
                 <h5>Nueva Contraseña</h5>
                 <div class="grid formgrid">
                     <div class="col-12 mb-2">
-                        <Password id="nuevopass" v-model="nuevaPassword" placeholder="Nueva Contraseña"
+                        <Password id="nuevopass" v-model="nuevaPassword" placeholder="Nueva Contraseña" promptLabel="Ingrese su nueva contraseña" weakLabel="Muy Simple" mediumLabel="Algo Seguro" strongLabel="Muy Seguro"
                             :toggleMask="true"></Password>
                     </div>
                 </div>
                 <h5>Repita la Nueva Contraseña</h5>
                 <div class="grid formgrid">
                     <div class="col-12 mb-2">
-                        <Password id="repitenuevopass" v-model="repetirNuevaPassword"
+                        <Password id="repitenuevopass" v-model="repetirNuevaPassword" promptLabel="Repita su nueva contraseña" weakLabel="Muy Simple" mediumLabel="Algo Seguro" strongLabel="Muy Seguro"
                             placeholder="Repita la Nueva Contraseña" :toggleMask="true"></Password>
                     </div>
                 </div>

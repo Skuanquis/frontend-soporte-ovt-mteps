@@ -225,7 +225,7 @@ onMounted(fetchPreguntasData);
                     </FloatLabel>
                     <br>
                     <FloatLabel>
-                        <InputText v-model="datos.respuesta" id="inputtext1" placeholder="Ingrese la respuesta" />
+                        <Textarea v-model="datos.respuesta" id="inputtext1" placeholder="Ingrese la respuesta" />
                         <label  for="inputtext1">Pregunta</label>
                     </FloatLabel>
                 </div>
@@ -249,7 +249,7 @@ onMounted(fetchPreguntasData);
                     </FloatLabel>
                     <br>
                     <FloatLabel>
-                        <InputText v-model="datos.respuesta" id="inputtext1" placeholder="Ingrese la respuesta" />
+                        <Textarea v-model="datos.respuesta" id="inputtext1" placeholder="Ingrese la respuesta" />
                         <label  for="inputtext1">Pregunta</label>
                     </FloatLabel>
                 </div>

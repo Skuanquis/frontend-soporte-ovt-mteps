@@ -94,7 +94,7 @@ const handleSubmit = async () => {
         const id_usuario = decoded.id;
         const atencionData = {
             id_usuario,
-            fecha: value2.value,
+            fecha: value2.value.toISOString().slice(0, 10),//cambie aqui xD
             tipo_atencion: value1.value.name,
             nombre_empleador: value6.value,
             correo: value7.value,

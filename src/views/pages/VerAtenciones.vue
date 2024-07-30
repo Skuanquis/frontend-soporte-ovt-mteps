@@ -194,7 +194,7 @@ function findSubProblema(problema, subproblema) {
 const handleUpdateAtencion = async () => {
     try {
         const atencionData = {
-            fecha: value2.value,
+            fecha: value2.value.toISOString().slice(0, 10),//cambie aqui xD
             tipo_atencion: value1.value.name,
             nombre_empleador: value6.value,
             correo: value7.value,
