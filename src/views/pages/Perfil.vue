@@ -80,7 +80,7 @@ const delegarSupervision = async () =>{
         toast.add({ severity: 'success', summary: 'Éxito', detail: 'Supervisor asignado con exito', life: 3000 });
         cerrarSesion()
     } catch (error) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Error al designar supervisor', life: 3000 });
+        toast.add({ severity: 'warn', summary: 'Atención', detail: 'Debes elegir al supervisor', life: 3000 });
     }
 }
 
@@ -130,7 +130,7 @@ onMounted(() => {
     <div class="grid p-fluid">
         <div class="col-12 md:col-6">
             <div class="card">
-                <h5>Datos Personales</h5>
+                <h5>Nombre</h5>
                 <div class="grid formgrid">
                     <div class="col-12 mb-2 ">
                         <InputText v-model="nombre" placeholder="Tu nombre"></InputText>

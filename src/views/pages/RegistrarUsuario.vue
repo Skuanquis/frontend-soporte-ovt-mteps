@@ -104,7 +104,7 @@ const handleSubmit = async () => {
                     </div>
                 </div>
                 <h5></h5>
-                <Button label="Enviar" class="mr-2 mb-2" @click="handleSubmit"></Button>
+                <Button label="Registrar" class="mr-2 mb-2" @click="handleSubmit"></Button>
             </div>
         </div>
     </div>

@@ -390,13 +390,14 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div class="data-section">
-                                    <h5 class="info-data-dialog">Otros Casos: {{ (dato.Total_Contraseña || 0) + (dato.Total_Falla_Interoperabilidad || 0) + (dato.Total_Otro || 0)}}</h5>
+                                    <h5 class="info-data-dialog">Otros Casos: {{ (dato.Total_Contraseña || 0) + (dato.Total_Falla_Interoperabilidad || 0) + (dato.Total_Otro || 0) + (dato.Deposito || 0)}}</h5>
                                     <div class="grid p-fluid">
                                         <div class="col md:col-6">
                                             <h5 class="case-data">Contraseña: {{ dato.Total_Contraseña }}</h5>
-                                            <h5 class="case-data">Falla de Interoperabilidad: {{ dato.Total_Falla_Interoperabilidad }}</h5>
+                                            <h5 class="case-data">Deposito: {{ dato.Deposito }}</h5>
                                         </div>
                                             <div class="col md:col-6">
+                                            <h5 class="case-data">Falla de Interoperabilidad: {{ dato.Total_Falla_Interoperabilidad }}</h5>
                                             <h5 class="case-data">Otro: {{ dato.Total_Otro }}</h5>
                                         </div>
                                     </div>

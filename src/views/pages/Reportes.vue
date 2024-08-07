@@ -24,6 +24,7 @@ const principal = ref([
     { name: 'Planillas', code: 'P' },
     { name: 'ROE', code: 'R' },
     { name: 'Trabajadores', code: 'T' },
+    { name: 'Deposito', code: 'D' },
     { name: 'Falla interoperabilidad', code: 'F' },
     { name: 'Contraseña', code: 'C' },
     { name: 'Otro', code: 'O' },

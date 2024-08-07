@@ -19,3 +19,7 @@ export const getActivitiesByUserIdCompletadas = () => {
 export const marcarActividadCompletada = (id) => {
     return api.put(`/marcar-actividad/${id}/complete`);
 };
+
+export const updateActivity = (id, activityData) => {
+    return api.put(`/actividades/${id}/update`, activityData);
+};

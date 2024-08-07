@@ -128,7 +128,8 @@ onMounted(() => {
             <h5 class="case-data">No Valida Trabajador: {{ reporte.Subproblema_Novalidatrabajador }}</h5>
           </div>
           <div class="col md:col-3">
-            <h5 class="info-data">Otros Casos: {{ (reporte.Total_Contraseña || 0) + (reporte.Total_Falla_Interoperabilidad || 0) + (reporte.Total_Otro || 0) }}</h5>
+            <h5 class="info-data">Otros Casos: {{ (reporte.Total_Contraseña || 0) + (reporte.Total_Falla_Interoperabilidad || 0) + (reporte.Total_Otro || 0) + (reporte.Deposito || 0)}}</h5>
+            <h5 class="case-data">Deposito: {{ reporte.Deposito }}</h5>
             <h5 class="case-data">Contraseña: {{ reporte.Total_Contraseña }}</h5>
             <h5 class="case-data">Falla de Interoperabilidad: {{ reporte.Total_Falla_Interoperabilidad }}</h5>
             <h5 class="case-data">Otro: {{ reporte.Total_Otro }}</h5>
@@ -218,13 +219,14 @@ onMounted(() => {
           </div>
         </div>
         <div class="data-section">
-          <h5 class="info-data-dialog">Otros Casos: {{ (datosMes[0].Total_Contraseña || 0) + (datosMes[0].Total_Falla_Interoperabilidad || 0) + (datosMes[0].Total_Otro || 0)}}</h5>
+          <h5 class="info-data-dialog">Otros Casos: {{ (datosMes[0].Total_Contraseña || 0) + (datosMes[0].Total_Falla_Interoperabilidad || 0) + (datosMes[0].Total_Otro || 0) + (datosMes[0].Deposito || 0)}}</h5>
           <div class="grid p-fluid">
             <div class="col md:col-6">
               <h5 class="case-data">Contraseña: {{ datosMes[0].Total_Contraseña }}</h5>
-              <h5 class="case-data">Falla de Interoperabilidad: {{ datosMes[0].Total_Falla_Interoperabilidad }}</h5>
+              <h5 class="case-data">Deposito: {{ datosMes[0].Deposito }}</h5>
             </div>
             <div class="col md:col-6">
+              <h5 class="case-data">Falla de Interoperabilidad: {{ datosMes[0].Total_Falla_Interoperabilidad }}</h5>
               <h5 class="case-data">Otro: {{ datosMes[0].Total_Otro }}</h5>
             </div>
           </div>
